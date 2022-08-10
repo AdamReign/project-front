@@ -1,11 +1,98 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>RPG</title>
-    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
-    <link href="/css/my.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/js/table.js"></script>
 </head>
 <body>
 <h1>RPG admin panel</h1>
-
+<div>
+    <h2>Accounts list:</h2>
+    <label for="select">Count per page:</label>
+    <select id="select" onChange="updateTable()">
+        <option>3</option>
+        <option>9</option>
+        <option>15</option>
+        <option>20</option>
+    </select>
+    <table id="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Race</th>
+            <th>Profession</th>
+            <th>Level</th>
+            <th>Birthday</th>
+            <th>Banned</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+    <script>
+        createTableBody();
+    </script>
+    <div id="pages"></div>
+</div>
+<hr/>
+<div>
+    <h2>Create new account:</h2>
+    <table>
+        <tr>
+            <td><label for="input_name">Name:</label></td>
+            <td id="name">
+                <script>
+                    createInput("name", "Length: 1-12", "12");
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="input_title">Title:</label></td>
+            <td id="title">
+                <script>
+                    createInput("title", "Length: 1-30", "30");
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="select_race">Race:</label></td>
+            <td id="race">
+                <script>
+                    getElementById("race").appendChild(createSelect("race", RACES));
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="select_profession">Profession:</label></td>
+            <td id="profession">
+                <script>
+                    getElementById("profession").appendChild(createSelect("profession", PROFESSIONS));
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="input_level">Level:</label></td>
+            <td><input id="input_level" type="number" min="0" max="100" maxlength="3" placeholder="0-100"></td>
+        </tr>
+        <tr>
+            <td><label for="input_birthday">Birthday:</label></td>
+            <td><input id="input_birthday" type="date"></td>
+        </tr>
+        <tr>
+            <td><label for="select_banned">Banned:</label></td>
+            <td id="banned">
+                <script>
+                    getElementById("banned").appendChild(createSelect("banned", BAN_STATUSES));
+                </script>
+            </td>
+        </tr>
+    </table><br>
+    <button class="save_button" onclick="createAccount()">
+        <img src="/img/save.png" alt="Save">
+    </button>
+</div>
 </body>
 </html>
